@@ -139,7 +139,7 @@ body {
 .search-bar input {
     background: rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 12px 15px 12px 45px;
+    padding: 12px 45px 12px 45px;
     border-radius: 25px;
     color: white;
     outline: none;
@@ -153,6 +153,25 @@ body {
     border-color: var(--accent);
     width: 400px;
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.btn-location {
+    position: absolute;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-location:hover {
+    color: var(--accent);
+    transform: scale(1.1);
 }
 
 .quick-select select {
@@ -465,15 +484,37 @@ footer strong {
     .weather-hero {
         flex-direction: column;
         text-align: center;
-        gap: 30px;
+        gap: 20px;
+        padding: 30px 20px;
+    }
+
+    .location-header h1 {
+        font-size: 2.5rem; /* Optimized text readability */
+    }
+
+    .current-weather h2 {
+        font-size: 4.5rem; /* Scaled down from 6rem */
     }
 
     .current-weather {
         text-align: center;
     }
 
-    .temp-display>div {
+    .temp-display > div {
         justify-content: center !important;
+    }
+
+    .weather-details {
+        grid-template-columns: 1fr; /* Explicit Stacked Layout */
+        gap: 15px;
+    }
+
+    .forecast-container {
+        padding: 20px 15px;
+    }
+
+    .search-bar {
+        width: 100%;
     }
 
     .search-bar input {
@@ -481,7 +522,16 @@ footer strong {
     }
 
     .nav-controls {
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    
+    .quick-select {
+        width: 100%;
+    }
+    
+    .quick-select select {
+        width: 100%;
     }
 }

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cityInput = document.getElementById('city-search');
     const countrySelect = document.getElementById('country-select');
     const logoutBtn = document.getElementById('logout-btn');
+    const locationBtn = document.getElementById('location-btn');
     const preloader = document.getElementById('preloader');
     const dashboard = document.getElementById('dashboard');
 
@@ -249,6 +250,36 @@ document.addEventListener('DOMContentLoaded', () => {
         preloader.className = 'preloader';
         preloader.style.opacity = '1';
         fetchWeather(e.target.value);
+    });
+
+    locationBtn.addEventListener('click', () => {
+        playSound('click');
+        if (navigator.geolocation) {
+            preloader.className = 'preloader';
+            preloader.style.opacity = '1';
+            
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                try {
+                    const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                    const geoData = await geoRes.json();
+                    const city = geoData.city || geoData.locality || geoData.principalSubdivision || 'New York';
+                    fetchWeather(city);
+                    cityInput.value = city;
+                } catch(e) {
+                    showToast('Failed to identify location name.', 'error');
+                    preloader.style.opacity = '0';
+                    setTimeout(() => { preloader.className = 'hidden'; }, 500);
+                }
+            }, (error) => {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.className = 'hidden'; }, 500);
+                showToast('Location access denied or unavailable.', 'error');
+            });
+        } else {
+            showToast('Geolocation is not supported by your browser.', 'error');
+        }
     });
 
     // Initial Load - Default City (or from landing page)

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Redirect if already logged in
     if (localStorage.getItem('isLoggedIn') === 'true') {
-        window.location.replace('../weather/dashboard.html');
+        window.location.replace('../index.html');
     }
 
     const loginForm = document.getElementById('login-form');
