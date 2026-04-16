@@ -24,15 +24,15 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero" style="flex-direction: column; text-align: center; justify-content: center; min-height: 60vh;">
-            <div class="hero-content fade-in" style="max-width: 800px; margin: 0 auto;">
-                <h1 style="font-size: 5rem; margin-bottom: 20px;">Check Weather <br><span class="gradient-text">Instantly</span></h1>
-                <p style="font-size: 1.3rem;">Experience the most beautiful and accurate dynamic weather tracking app.</p>
+        <section class="hero center-hero">
+            <div class="hero-content fade-in">
+                <h1>Check Weather <br><span class="gradient-text">Instantly</span></h1>
+                <p>Experience the most beautiful and accurate dynamic weather tracking app.</p>
                 
-                <div class="search-bar" style="max-width: 550px; margin: 40px auto 10px; display: flex; align-items: center; background: rgba(0,0,0,0.3); border-radius: 16px; padding: 6px 6px 6px 20px; border: 1px solid rgba(255,255,255,0.2); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2), 0 10px 25px rgba(0,0,0,0.2);">
-                    <i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 12px; font-size: 1.3rem;"></i>
-                    <input type="text" id="landing-search" placeholder="Enter city name..." style="background: transparent; border: none; color: white; flex: 1; outline: none; font-size: 1.15rem; padding: 12px 0;">
-                    <button id="search-btn" class="btn-primary" style="margin: 0; border-radius: 12px; padding: 14px 30px; font-size: 1.1rem; box-shadow: none;">Search</button>
+                <div class="landing-search-bar">
+                    <i class="fa-solid fa-location-dot landing-search-icon"></i>
+                    <input type="text" id="landing-search" placeholder="Enter city name..." autocomplete="off">
+                    <button id="search-btn" class="btn-primary landing-search-btn">Search</button>
                 </div>
             </div>
         </section>
