@@ -115,3 +115,92 @@ body::before {
 .auth-footer a:hover {
     color: white;
 }
+
+/* Social Login Styles */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 25px 0 15px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.divider span {
+    padding: 0 10px;
+}
+.social-login {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+.btn-social {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    color: white;
+}
+.google-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.google-btn:hover {
+    background: #db4437;
+    border-color: #db4437;
+    box-shadow: 0 5px 15px rgba(219, 68, 55, 0.4);
+    transform: translateY(-2px);
+}
+.facebook-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.facebook-btn:hover {
+    background: #4267B2;
+    border-color: #4267B2;
+    box-shadow: 0 5px 15px rgba(66, 103, 178, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Responsive Mobile view */
+@media (max-width: 480px) {
+    .auth-container {
+        width: 90%;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    .auth-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .auth-header p {
+        font-size: 0.85rem;
+    }
+
+    .input-group input {
+        padding: 12px 15px 12px 40px;
+        font-size: 0.95rem;
+    }
+
+    .social-login {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-social {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+}
