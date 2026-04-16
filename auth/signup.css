@@ -204,3 +204,20 @@ body::before {
         font-size: 0.95rem;
     }
 }
+
+/* Password Toggle Styles */
+.input-group .toggle-password {
+    left: auto;
+    right: 15px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    z-index: 10;
+}
+.input-group .toggle-password:hover {
+    color: var(--accent);
+}
+.input-group input {
+    padding-right: 45px !important;
+}

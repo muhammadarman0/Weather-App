@@ -48,6 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
+    // Toggle Password Visibility
+    const togglePwd = document.getElementById('toggle-pwd');
+    const pwdInput = document.getElementById('password');
+    if (togglePwd && pwdInput) {
+        togglePwd.addEventListener('click', () => {
+            playSound('click');
+            const type = pwdInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            pwdInput.setAttribute('type', type);
+            togglePwd.className = type === 'password' ? 'fa-regular fa-eye toggle-password' : 'fa-regular fa-eye-slash toggle-password';
+        });
+    }
+
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
