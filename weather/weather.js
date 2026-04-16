@@ -30,8 +30,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainIconEl = document.getElementById('main-weather-icon');
     const hourlyForecastContainer = document.getElementById('hourly-forecast');
 
+    // Web Audio API helper for sound effects
+    function playSound(type) {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const ctx = new AudioContext();
+            const osc = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(ctx.destination);
+
+            if (type === 'success') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+                gainNode.gain.setValueAtTime(0, ctx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.05);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.6);
+            } else if (type === 'click') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, ctx.currentTime);
+                gainNode.gain.setValueAtTime(0, ctx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.02);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.15);
+            }
+        } catch(e) {}
+    }
+
     // Logout Functionality
     logoutBtn.addEventListener('click', () => {
+        playSound('click');
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('currentUser');
         window.location.replace('../auth/login.html');
@@ -95,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => { preloader.className = 'hidden'; }, 500);
                 return;
             }
+
+            playSound('success');
 
             const loc = geoData.results[0];
             const lat = loc.latitude;
@@ -175,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') {
             const city = cityInput.value.trim();
             if (city) {
+                playSound('click');
                 preloader.className = 'preloader';
                 preloader.style.opacity = '1';
                 fetchWeather(city);
@@ -184,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     countrySelect.addEventListener('change', (e) => {
+        playSound('click');
         preloader.className = 'preloader';
         preloader.style.opacity = '1';
         fetchWeather(e.target.value);

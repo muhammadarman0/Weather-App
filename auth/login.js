@@ -7,6 +7,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const toast = document.getElementById('toast');
 
+    // Web Audio API Sound Helper
+    function playSound(type) {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const ctx = new AudioContext();
+            const osc = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(ctx.destination);
+
+            if (type === 'success') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(659.25, ctx.currentTime); // E5
+                osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.15); // A5
+                gainNode.gain.setValueAtTime(0, ctx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.8);
+            } else if (type === 'click') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(400, ctx.currentTime);
+                gainNode.gain.setValueAtTime(0, ctx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.02);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.15);
+            }
+        } catch(e) {}
+    }
+
     function showToast(message, type = 'error') {
         let icon = type === 'error' ? '<i class="fa-solid fa-circle-exclamation"></i>' : '<i class="fa-solid fa-circle-check"></i>';
         toast.innerHTML = `${icon} ${message}`;
@@ -38,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify(validUser));
 
+            playSound('success');
             showToast('Login successful!', 'success');
 
             // Redirect to dashboard
@@ -50,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Social Login Handling
     function handleSocialLogin(provider) {
+        playSound('click');
         // Create custom modal overlay
         const overlay = document.createElement('div');
         overlay.className = 'modal-overlay fade-in';
@@ -80,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             overlay.remove();
+            playSound('success');
             showToast(`Verifying ${provider} connection...`, 'success');
             
             setTimeout(() => {
