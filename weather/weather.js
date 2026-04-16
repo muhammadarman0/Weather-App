@@ -90,7 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const geoData = await geoRes.json();
 
             if (!geoData.results || geoData.results.length === 0) {
-                showToast(`City "${city}" not found.`, 'error');
+                showToast(`Location "${city}" not found. Please try a valid city or country!`, 'error');
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.className = 'hidden'; }, 500);
                 return;
             }
 
@@ -162,7 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error(error);
-            showToast("Failed to fetch weather data", "error");
+            showToast("Failed to fetch. Please check your spelling.", "error");
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.className = 'hidden'; }, 500);
         }
     }
 
