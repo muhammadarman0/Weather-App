@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - AeroWeather</title>
+    <link rel="stylesheet" href="../assets/global.css">
+    <link rel="stylesheet" href="./signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="toast" class="toast"></div>
+
+    <div class="auth-container glass-panel fade-in">
+        <div class="auth-header">
+            <h2>Join AeroWeather</h2>
+            <p>Your beautiful weather dashboard awaits.</p>
+        </div>
+
+        <form id="signup-form" class="auth-form">
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="name" placeholder="Full Name" required autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email Address" required autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="btn-primary">Create Account <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+
+</html>

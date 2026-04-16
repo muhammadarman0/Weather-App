@@ -1,0 +1,362 @@
+/* Dashboard Background with Dynamic Theme Variable */
+body {
+    background: var(--dynamic-bg, linear-gradient(135deg, #0f2027, #203a43, #2c5364));
+    background-size: cover;
+    background-attachment: fixed;
+    transition: background 1.5s ease;
+}
+
+/* Glowing Orbs - Tuned for softer contrast so they don't overpower text */
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -1;
+    opacity: 0.4; 
+}
+
+.orb-1 {
+    width: 600px; height: 600px;
+    background: #4facfe;
+    top: -150px; left: -100px;
+    animation: floatOrb 12s infinite alternate;
+}
+
+.orb-2 {
+    width: 500px; height: 500px;
+    background: #00f2fe;
+    bottom: -150px; right: 2%;
+    animation: floatOrb 15s infinite alternate-reverse;
+}
+
+.orb-3 {
+    width: 450px; height: 450px;
+    background: #43e97b;
+    top: 30%; left: 35%;
+    animation: floatOrb 20s infinite alternate;
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(0px, 0px) scale(1); }
+    100% { transform: translate(80px, 60px) scale(1.1); }
+}
+
+.dashboard-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #0b131e; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+.loader-spinner {
+    width: 60px; height: 60px;
+    border: 6px solid rgba(255,255,255,0.1);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.hidden { display: none !important; }
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 15px;
+    color: var(--text-secondary);
+}
+
+.search-bar input {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 15px 12px 45px;
+    border-radius: 25px;
+    color: white;
+    outline: none;
+    width: 320px;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.search-bar input:focus {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: var(--accent);
+    width: 400px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.quick-select select {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 25px;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+.quick-select select:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+.quick-select select option {
+    background: #1e293b;
+    color: white;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.btn-logout {
+    background: rgba(255, 75, 75, 0.15);
+    color: #ff7675;
+    border: 1px solid rgba(255, 75, 75, 0.3);
+    padding: 12px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-logout:hover {
+    background: #ff4757;
+    color: white;
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+    transform: scale(1.1);
+}
+
+/* Main Dashboard Area */
+.weather-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.weather-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 45px 55px;
+    border-radius: 30px;
+    /* Extra dark overlay to make hero text really stand out */
+    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.location-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    letter-spacing: 1px;
+}
+
+.location-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.current-weather {
+    text-align: right;
+}
+
+.current-weather h2 {
+    font-size: 6rem;
+    line-height: 1;
+    font-weight: 800;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.current-weather p {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-top: 12px;
+    text-transform: capitalize;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+#main-weather-icon {
+    font-size: 4.5rem; 
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));
+}
+
+/* Detail Cards */
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.detail-card {
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, background 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.1));
+}
+
+.detail-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.detail-card i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+}
+
+.detail-card h3 {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.detail-card p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Hourly Forecast Design */
+.forecast-container {
+    padding: 30px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.05));
+}
+.hourly-forecast {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+}
+.hourly-item {
+    min-width: 100px;
+    padding: 20px 15px;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+.hourly-item:hover {
+    background: rgba(0,0,0,0.4);
+    transform: scale(1.05);
+    border-color: var(--accent);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+.hourly-time { font-size: 1.05rem; color: var(--text-secondary); font-weight: 500;}
+.hourly-icon i { font-size: 2rem; color: #fff; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+.hourly-temp { font-weight: 700; font-size: 1.4rem; text-shadow: 0 2px 5px rgba(0,0,0,0.5);}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: auto;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+footer strong {
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .search-bar input:focus { width: 300px; }
+    .glow-orb { opacity: 0.2; } /* tone down orbs on smaller screens */
+}
+
+@media (max-width: 768px) {
+    .weather-hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .current-weather {
+        text-align: center;
+    }
+    .temp-display > div {
+        justify-content: center !important;
+    }
+    .search-bar input { width: 100%; }
+    .nav-controls { flex-wrap: wrap; justify-content: center; }
+}
