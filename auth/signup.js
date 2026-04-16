@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.innerHTML = `
             <div class="glass-panel modal-content" style="padding: 30px; text-align: left; max-width: 380px; width: 90%;">
                 <h3 style="margin-bottom: 10px; font-size: 1.5rem;"><i class="fa-brands fa-${provider.toLowerCase() === 'google' ? 'google' : 'facebook-f'}" style="margin-right: 8px;"></i>Join with ${provider}</h3>
-                <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px;">Choose an account or enter your email to continue to AeroWeather.</p>
+                <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px;">Choose an account or enter your email to continue to Weather App.</p>
                 <input type="email" id="social-email" placeholder="Email or phone" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.25); color: white; margin-bottom: 25px; outline: none; transition: all 0.3s;" autocomplete="off">
                 <div style="display: flex; gap: 15px;">
                     <button type="button" id="cancel-social" style="flex: 1; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.1); color: white; border: none; cursor: pointer; transition: 0.3s;">Cancel</button>

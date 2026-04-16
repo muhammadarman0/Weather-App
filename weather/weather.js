@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Format nice string
             cityNameEl.innerText = `${loc.name}, ${loc.country || ''}`;
 
-            // Weather API (Current & Hourly)
-            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,surface_pressure&hourly=temperature_2m,weather_code&timezone=auto`;
+            // Weather API (Current, Hourly & Daily)
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,surface_pressure&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
             const weatherRes = await fetch(url);
             const weatherData = await weatherRes.json();
 
@@ -189,6 +189,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 hourlyForecastContainer.appendChild(item);
             }
 
+            // Populate 7-Day Forecast
+            const daily = weatherData.daily;
+            const dailyContainer = document.getElementById('daily-forecast');
+            if (dailyContainer) {
+                dailyContainer.innerHTML = '';
+                
+                for(let i = 0; i < daily.time.length; i++) {
+                    if (i >= 7) break; // ensuring 7 days max
+                    const date = new Date(daily.time[i]);
+                    const dayName = i === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
+                    const maxTemp = Math.round(daily.temperature_2m_max[i]);
+                    const minTemp = Math.round(daily.temperature_2m_min[i]);
+                    const wd = getWeatherDetails(daily.weather_code[i]);
+
+                    const dItem = document.createElement('div');
+                    dItem.className = 'daily-item fade-in';
+                    dItem.style.animationDelay = `${0.3 + (i * 0.1)}s`;
+                    dItem.innerHTML = `
+                        <div class="daily-day">${dayName}</div>
+                        <div class="daily-icon"><i class="fa-solid ${wd.icon}"></i></div>
+                        <div class="daily-temp-range"><strong>${maxTemp}°</strong><br><span style="font-size:0.85em; opacity:0.8;">${minTemp}°</span></div>
+                    `;
+                    dailyContainer.appendChild(dItem);
+                }
+            }
+
             // Hide loader gently
             preloader.style.opacity = '0';
             setTimeout(() => {
@@ -225,9 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchWeather(e.target.value);
     });
 
-    // Initial Load - Default City
-    fetchWeather('New York');
-
+    // Initial Load - Default City (or from landing page)
+    const initCity = localStorage.getItem('landingSearchCity') || 'New York';
+    fetchWeather(initCity);
+    if(localStorage.getItem('landingSearchCity')) {
+        localStorage.removeItem('landingSearchCity');
+        cityInput.value = initCity;
+    }
     // Simple toast helper (reused pattern)
     function showToast(msg, type = 'error') {
         const toast = document.getElementById('toast');

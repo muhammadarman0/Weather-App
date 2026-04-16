@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - AeroWeather</title>
+    <title>Dashboard - Weather App</title>
     <link rel="stylesheet" href="../assets/global.css">
     <link rel="stylesheet" href="./weather.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,10 +26,10 @@
     <div class="dashboard-wrapper blur-bg hidden" id="dashboard">
         <!-- Navbar -->
         <nav class="navbar glass-panel">
-            <div class="nav-brand">
+            <a href="../index.html" class="nav-brand" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px;">
                 <i class="fa-solid fa-cloud-bolt fa-bounce" style="color: var(--accent);"></i>
-                <span>AeroWeather</span>
-            </div>
+                <span>Weather App</span>
+            </a>
 
             <div class="nav-controls">
                 <div class="search-bar">
@@ -102,7 +102,7 @@
             </div>
 
             <!-- New 24-Hour Forecast Section -->
-            <div class="forecast-container glass-panel fade-in" style="animation-delay: 0.3s;">
+            <div class="forecast-container glass-panel fade-in" style="animation-delay: 0.3s; margin-bottom: 20px;">
                 <div class="forecast-header"
                     style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="font-weight: 600; font-size: 1.2rem;"><i class="fa-regular fa-clock"
@@ -110,6 +110,18 @@
                 </div>
                 <div class="hourly-forecast" id="hourly-forecast">
                     <!-- Hourly items injected by JS -->
+                </div>
+            </div>
+
+            <!-- New 7-Day Forecast Section -->
+            <div class="forecast-container glass-panel fade-in" style="animation-delay: 0.35s;">
+                <div class="forecast-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-weight: 600; font-size: 1.2rem;"><i class="fa-regular fa-calendar-days"
+                            style="margin-right: 8px;"></i>7-Day Forecast</h3>
+                </div>
+                <div class="daily-forecast" id="daily-forecast">
+                    <!-- Daily items injected by JS -->
                 </div>
             </div>
         </main>
