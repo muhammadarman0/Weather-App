@@ -1,15 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Authentication Check
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.replace('../auth/login.html');
-        return;
-    }
-
-    // Set Welcome Name
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.name) {
-        document.getElementById('user-greeting').innerText = `Hi, ${currentUser.name.split(' ')[0]}`;
-    }
 
     // UI Elements
     const cityInput = document.getElementById('city-search');
@@ -62,12 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch(e) {}
     }
 
-    // Logout Functionality
+    // Home Navigation Functionality
     logoutBtn.addEventListener('click', () => {
         playSound('click');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('currentUser');
-        window.location.replace('../auth/login.html');
+        window.location.href = '../index.html';
     });
 
     // Update Date Time dynamically

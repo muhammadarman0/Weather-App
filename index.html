@@ -18,7 +18,7 @@
         </div>
         <div class="nav-links">
             <a href="index.html" class="nav-btn login-btn" style="border: none;">Home</a>
-            <a href="#" id="dashboard-link" class="nav-btn signup-btn">Dashboard</a>
+            <a href="weather/dashboard.html" class="nav-btn signup-btn">Dashboard</a>
         </div>
     </nav>
 
@@ -65,13 +65,8 @@
     </footer>
 
     <script>
-        const dashboardLink = document.getElementById('dashboard-link');
         const searchBtn = document.getElementById('search-btn');
         const landingSearch = document.getElementById('landing-search');
-
-        // Dynamic Dashboard Routing
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        dashboardLink.href = isLoggedIn ? 'weather/dashboard.html' : 'auth/login.html';
 
         // Web Audio API helper for sound effects
         function playClickSound() {
@@ -103,7 +98,7 @@
             searchBtn.style.transform = 'scale(0.95)';
             
             setTimeout(() => {
-                window.location.href = isLoggedIn ? 'weather/dashboard.html' : 'auth/login.html';
+                window.location.href = 'weather/dashboard.html';
             }, 200);
         }
 
